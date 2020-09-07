@@ -19,6 +19,7 @@
     "noEmit": true,
     "jsx": "react"
   },
+  "defaultSeverity": "none",
   "include": [
     "src"
   ]
