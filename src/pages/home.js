@@ -4,24 +4,24 @@ class Home extends Component {
   constructor(args){
     super(args)
     this.state = {
-     title: "微信",
-     list:[
-       '这波能反杀',
-       '这波能反杀',
-       '这波能反杀',
-       '这波能反杀',
-       '这波能反杀',
-       '这波能反杀',
-       '这波能反杀',
-       '这波能反杀',
-       '这波能反杀',
-       '这波能反杀',
-       '这波能反杀',
-       '这波能反杀',
-       '这波能反杀',
-       '这波能反杀',
-       '这波能反杀',
-     ]
+      title: "微信",
+      list:[
+        '这波能反杀',
+        '这波能反杀',
+        '这波能反杀',
+        '这波能反杀',
+        '这波能反杀',
+        '这波能反杀',
+        '这波能反杀',
+        '这波能反杀',
+        '这波能反杀',
+        '这波能反杀',
+        '这波能反杀',
+        '这波能反杀',
+        '这波能反杀',
+        '这波能反杀',
+        '这波能反杀',
+      ]
     };
     this.templateHTML = `
       <div class="page chat-page" id="home">
@@ -46,7 +46,7 @@ class Home extends Component {
           <ul class="chat-footer">
             <li>
               <span class="iconfont chat icon-cebianlan_liaotianliebiao"></span>
-              <span class="zh-name chat">微信</span>
+              <span class="zh-name chat" id="click-change">微信</span>
             </li>
             <li>
               <span class="icon iconfont icon-tongxunlu-copy"></span>
@@ -67,6 +67,8 @@ class Home extends Component {
   }
 
   componentDidMount() {
+   let _this = this;
+   console.log(this.pre)
     console.log('home - componentDidMount');
     document.getElementById('list').addEventListener("click",(e)=>{
       let event = e || window.event;
@@ -75,12 +77,16 @@ class Home extends Component {
         navigator.go('chat')
       }
     })
+
+    document.getElementById('click-change').addEventListener("click",(e)=>{
+     _this.setState({..._this.state,title:'微信2'})
+   })
   }
   
   componentWillMount() {
     console.log('home - componentWillCount');
   }
-
+  
   render() {
     return this.templateHTML;
   }

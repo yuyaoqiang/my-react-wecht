@@ -4,9 +4,9 @@ class Component {
   constructor(parent) {
     this.parent = document.querySelector(parent);
     this.pre = null;
-    this.next = null;
     this.state =null;
     setTimeout(() => {
+     this.pre = this.state;
      this.compile();
     },0)
   }
@@ -14,7 +14,6 @@ class Component {
   compile() {
     this.componentWillMount();
     const tempateHTML = this.render();
-    
     const rendered = template.compile(tempateHTML)(this.state);
     this.append('in',rendered);
     this.componentDidMount();
@@ -28,26 +27,25 @@ class Component {
 
   }
   
-  componentWillUpdate(pre,next) {
-  
-  }
+  componentWillUpdate(pre,next) {}
 
-  componentDidUpdate(pre,next) {
+  componentDidUpdate(pre,next) {}
 
-  }
-
-  setState() {
-
+  setState(state) {
+   this.pre = this.state;
+   this.state = state;
+   this.update();
   }
 
   render() {}
 
   update() {
-    this.componentWillUpdate && this.componentWillUpdate(this.pre,this.next);
+    if(this.pre === this.state) return
+    this.componentWillUpdate && this.componentWillUpdate(this.pre,this.state);
     const tempateHTML = this.render();
     const rendered = template.compile(tempateHTML)(this.state);
-    this.append('in',rendered);
-    this.componentDidUpdate && this.componentDidUpdate(this.pre,this.next);
+    this.append(null,rendered);
+    this.componentDidUpdate && this.componentDidUpdate(this.pre,this.state);
   }
 
   destory(animationOut) {
